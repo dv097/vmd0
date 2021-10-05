@@ -1,0 +1,139 @@
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title> Mod analysis of market volumes - horizontal and vertical volume </title>
+    <meta name="viewport" content="width = device-width">
+    <meta name="keywords" content="forex volumes, indicator of the forex candlestick volume">
+    <meta name="description" content="Vertical and horizontal volume - Market formation is determined by three factors - volume, price and time. Every day a certain area of value develops within the market in accordance with the law of equilibrium, which assumes a certain number of buyers and sellers.">
+    <meta name="AUTHOR" CONTENT="Experienced Trader">
+    <meta name="MOD" CONTENT="Mr_DIV">
+    <meta name="copyright" content="© 2017 Seasoned Trader">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    <!-- <link rel="stylesheet" href="css/styleshi.css"> -->
+    <style type="text/css">
+    	body{background:transparent;padding:0;margin:0;background-repeat:no-repeat}.divinp{position:absolute;z-index:101;top:0;right:0}.select{padding:5px;font-size:18px;background:#2e3e52;color:#fff;border:none;width:200px;border-radius:2px}#period{width:100px}#Menu{font-size:18px;color:#fff;width:200px}a{color:#0ff;text-decoration:none}a:active{color:#0ff;text-decoration:none}a:visited{color:#87ceeb;text-decoration:none}a:hover{color:#ffd800;text-decoration:underline}.selectdiv{padding:0;top:0}.sel{padding:5px 0 5px 22px;cursor:pointer!important;font-family:Roboto,sans-serif,Arial}.sels{padding:5px 0 5px 22px}.sel:hover{background:#1e3046}.divscrol{position:relative;width:200px;max-height:80vh;overflow-x:hidden;overflow-y:auto;display:none}
+    </style>
+</head>
+
+<body>
+    <canvas id="valx"></canvas>
+    <div class="divinp">
+        <div class="select selectdiv">
+            <div id="pair" val="EURO" class="sel"><img class="imgsel"/>EUR/USD</div>
+            <div class="divscrol">
+                <div title="AUD/CAD - Binomo" val="AUD/CAD" id="AUD_CAD" data="Binomo" class="sel sels"><img class="imgsel"/>AUD/CAD</div>
+                <div title="AUD/JPY - Binomo" val="AUD/JPY" id="AUD_JPY" data="Binomo" class="sel sels"><img class="imgsel"/>AUD/JPY</div>
+                <div title="AUD/USD - Binomo" val="AUD/USD" id="AUD_USD" data="Binomo" class="sel sels"><img class="imgsel"/>AUD/USD</div>
+                <div title="CAD/CHF - Binomo" val="CAD/CHF" id="CAD_CHF" data="Binomo" class="sel sels"><img class="imgsel"/>CAD/CHF</div>
+                <div title="EUR/CAD - Binomo" val="EUR/CAD" id="EUR_CAD" data="Binomo" class="sel sels"><img class="imgsel"/>EUR/CAD</div>
+                <div title="EUR/GBP - Binomo" val="EUR/GBP" id="EUR_GBP" data="Binomo" class="sel sels"><img class="imgsel"/>EUR/GBP</div>
+                <div title="EUR/JPY - Binomo" val="EUR/JPY" id="EUR_JPY" data="Binomo" class="sel sels"><img class="imgsel"/>EUR/JPY</div>
+                <div title="EUR/USD - Binomo" val="EURO" id="EURO" data="Binomo" class="sel sels"><img class="imgsel"/>EUR/USD</div>
+                <div title="GBP/AUD - Binomo" val="GBP/AUD" id="GBP_AUD" data="Binomo" class="sel sels"><img class="imgsel"/>GBP/AUD</div>
+                <div title="GBP/JPY - Binomo" val="GBP/JPY" id="GBP_JPY" data="Binomo" class="sel sels"><img class="imgsel"/>GBP/JPY</div>
+                <div title="GBP/USD - Binomo" val="GBP/USD" id="GBP_USD" data="Binomo" class="sel sels"><img class="imgsel"/>GBP/USD</div>
+                <div title="NZD/USD - Binomo" val="NZD/USD" id="NZD_USD" data="Binomo" class="sel sels"><img class="imgsel"/>NZD/USD</div>
+                <div title="USD/CAD - Binomo" val="USD/CAD" id="USD_CAD" data="Binomo" class="sel sels"><img class="imgsel"/>USD/CAD</div>
+                <div title="USD/CHF - Binomo" val="USD/CHF" id="USD_CHF" data="Binomo" class="sel sels"><img class="imgsel"/>USD/CHF</div>
+                <div title="USD/JPY - Binomo" val="USD/JPY" id="USD_JPY" data="Binomo" class="sel sels"><img class="imgsel"/>USD/JPY</div>
+                <div title="ALTIDX - Binomo" val="ALTBITF-CXDXF" id="ALTBITF-CXDXF" data="Binomo" class="sel sels"><img class="imgsel"/>ALTIDX</div>
+                <div title="CRYPTO IDX - Binomo" val="Z-CRY/IDX" id="Z-CRY_IDX" data="Binomo" class="sel sels"><img class="imgsel"/>CRYPTO IDX</div>
+                <div title="Bitcoin - Binomo" val="BTC/USD" id="BTC_USD" data="Binomo" class="sel sels"><img class="imgsel"/>Bitcoin</div>
+                <div title="Litecoin - Binomo" val="LTC/USD" id="LTC_USD" data="Binomo" class="sel sels"><img class="imgsel"/>Litecoin</div>
+                <div title="BTC/LTC - Binomo" val="BTC/LTC" id="BTC_LTC" data="Binomo" class="sel sels"><img class="imgsel"/>BTC/LTC</div>
+                <div title="BCH/USD - Binomo" val="BCH/USD" id="BCH_USD" data="Binomo" class="sel sels"><img class="imgsel"/>BCH/USD</div>
+                <div title="EOS/USD - Binomo" val="EOS/USD" id="EOS_USD" data="Binomo" class="sel sels"><img class="imgsel"/>EOS/USD</div>
+                <div title="AUD/CAD-OTC - Binomo" val="Z-AUD/CAD" id="Z-AUD_CAD" data="Binomo" class="sel sels"><img class="imgsel"/>Z-AUD/CAD (OTC)</div>
+                <div title="EUR/USD-OTC - Binomo" val="Z-EUR/USD" id="Z-EUR_USD" data="Binomo" class="sel sels"><img class="imgsel"/>Z-EUR/USD (OTC)</div>
+                <div title="EUR/CAD-OTC - Binomo" val="Z-EUR/CAD" id="Z-EUR_CAD" data="Binomo" class="sel sels"><img class="imgsel"/>Z-EUR/CAD (OTC)</div>
+                <div title="USD/JPY-OTC - Binomo" val="Z-USD/JPY" id="Z-USD_JPY" data="Binomo" class="sel sels"><img class="imgsel"/>Z-USD/JPY (OTC)</div>
+                <div title="GBP/USD-OTC - Binomo" val="Z-GBP/USD" id="Z-GBP_USD" data="Binomo" class="sel sels"><img class="imgsel"/>Z-GBP/USD (OTC)</div>
+                <div title="GBP/JPY-OTC - Binomo" val="Z-GBP/JPY" id="Z-GBP_JPY" data="Binomo" class="sel sels"><img class="imgsel"/>Z-GBP/JPY (OTC)</div>
+            </div>
+            <select id="size" class="select" style="width: auto;">
+                <option value="15" id="15">15c.</option>
+                <option value="60" id="60">M1</option>
+                <option value="120" id="60">M2</option>
+                <option value="180" id="60">M3</option>
+                <option value="240" id="60">M4</option>
+                <option value="300" id="300">M5</option>
+                <option value="600" id="600">M10</option>
+                <option value="900" id="900">M15</option>
+                <option value="1800" id="1800">M30</option>
+                <option value="3600" id="3600">H1</option>
+                <option value="14400" id="14400">H4</option>
+                <option value="86400" id="86400">D1</option>
+                <option value="604800" id="604800">W1</option>
+            </select>
+            <input id="period" value="10" placeholder="Period" class="select" />
+            <br>
+            <div class="hiden" id="url1">
+                <input class="checkbox" type="checkbox" id="open_menu" title="Show settings">
+                <label> menu </label>
+            </div>
+            <div id="Menu">
+                <select id="background" class="select" title="Choose your desired background color" style="display: none;">
+                    <option value="0" id="21252c"> Native background </option>
+                    <option value="1" id="000000"> Black background </option>
+                    <option value="2" id="00008b"> Dark ultramarine background </option>
+                    <option value="3" id="808080"> Gray background </option>
+                    <option value="4" id="686c5e"> Gray concrete background </option>
+                    <option value="5" id="964b00"> Brown background </option>
+                    <option value="6" id="ffd700"> Gold background </option>
+                    <option value="7" id="blok_shema"> Block diagram </option>
+                    <option value="8" id="none_fon"> Transparent </option>
+                </select>
+                <input class="checkbox" type="checkbox" id="color" title="Added colors for volumes depending on the quantity">
+                <label> Values colors </label>
+                <br>
+                <input class="checkbox" type="checkbox" id="invert" title="Invert the colors of the volumes (if the checkbox is removed, we will get the original)">
+                <label> Colors by trend </label>
+                <br>
+                <input class="checkbox" type="checkbox" id="timer" title="Enable the countdown and also align the time in minutes to the binomo chart (candlestick closing time)">
+                <label> Falling timer </label>
+                <br>
+                <input class="checkbox" type="checkbox" id="max_obj" title="Include maximum volume values above each candlestick">
+                <label> Max. volume </label>
+                <br>
+                <input class="checkbox" type="checkbox" id="strelki_check" title="Displays an arrow depending on the close of the last candle above or below the maximum volume in it.">
+                <label> Show Arrows </label>
+                <br>
+                <input class="checkbox" type="checkbox" id="strelki_procent" title="Displays small arrows depending on the color of the candle. If the candle is green, it means at the bottom 100%. If it is red, then at the top 100%. The higher the percentage, the better. ">
+                <label> Show small arrows </label>
+                <br>
+                <input class="checkbox" type="checkbox" id="max_obj_color" title="If the closing of the candle is higher than the maximum volume, then color the volume filled otherwise red">
+                <label> Color max. volume </label>
+                <br>
+                <input class="checkbox" type="checkbox" id="odinak" title="Search for the same level in adjacent candles and side histogram">
+                <label> Find duplicate values</label>
+                <br style="display: none;">
+                <input type="number" id="obrez" value="0" min="0" max="15" title="How many characters should be cut off at the beginning of the volume value (from 0 to 15)" style="display: none;">
+                <label style="display: none;"> Cut off the beginning of a value </label>
+                <br style="display: none;">
+                <select id="font" class="select" title="Where do we change the font?" style="display: none;">
+                    <option value="0" id="vremya_size"> time font </option>
+                    <option value="1" id="max_size"> Mac font. volume </option>
+                    <option value="2" id="gis_size"> font histogram price </option>
+                    <option value="3" id="ur_gist"> font max. histograms </option>
+                    <option value="4" id="ur_str_size"> large arrow font </option>
+                    <option value="5" id="str_min_size"> small arrow font </option>
+                </select>
+                <br style="display: none;">
+                <input type="number" id="font_size" value="14" min="1" max="100" title="Font size" style="display: none;">
+                <label style="display: none;"> Font size </label>
+                <br style="display: none;"> </div>
+            <div id="Strelki_On" hidden="true">
+                <div class="close_1">
+                    <label id="close_1"></label>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="preload"></div> -->
+        <script src="jav_.js"></script>
+    </div>
+</body>
+
+</html>
