@@ -1019,7 +1019,7 @@ var Sign = function () {
                       // var win = document.getElementById('vasyk').contentWindow;
                       window.postMessage(msg, "https://dv097.github.io/vmd0/");
                     }
-                    var postMsg = "SigUP : " + rash_up + " - SigDN : " + rash_down + " - SigCol : " + ("#d75c48" == color_text ? "Red" : "#008f1d" == color_text ? "Green" : "White");
+                    var postMsg = {"my" : ("SigUP : " + rash_up + " - SigDN : " + rash_down + " - SigCol : " + ("#d75c48" == color_text ? "Red" : "#008f1d" == color_text ? "Green" : "White"))}
                     postCrossDomainMessage(postMsg);
                     // console.log("SigUP : " + rash_up + " - SigDN : " + rash_down + " - SigCol : " + ("#d75c48" == color_text ? "Red" : "#008f1d" == color_text ? "Green" : "White"))
                     //sessionStorage.setItem("SigUP", rash_up), sessionStorage.setItem("SigDN", rash_down), sessionStorage.setItem("SigCol", ("#d75c48" == color_text ? "Red" : "#008f1d" == color_text ? "Green" : "White"))
